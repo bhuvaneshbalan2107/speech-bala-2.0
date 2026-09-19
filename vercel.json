@@ -1,0 +1,12 @@
+{
+  "builds": [
+    { "src": "api/predict.py", "use": "@vercel/python" },
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "app.js", "use": "@vercel/static" },
+    { "src": "styles.css", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/predict", "dest": "api/predict.py" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
