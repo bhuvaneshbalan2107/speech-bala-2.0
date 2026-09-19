@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10231f" />
+    <title>Sign Language to Speech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">✦</span><span>gesture / voice</span></div>
+        <div class="status"><span class="status-dot" id="statusDot"></span><span id="statusText">Camera offline</span></div>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">ASL recognition studio</p>
+        <h1>Give your hands<br /><em>a voice.</em></h1>
+        <p class="lede">Make a sign in front of your camera. The model reads each gesture, builds a sentence, and lets your browser speak it aloud.</p>
+      </section>
+
+      <section class="workspace">
+        <div class="camera-panel">
+          <div class="panel-heading"><span>Live capture</span><span class="mono" id="fpsLabel">-- FPS</span></div>
+          <div class="camera-stage">
+            <video id="inputVideo" playsinline></video>
+            <canvas id="outputCanvas"></canvas>
+            <div class="camera-placeholder" id="placeholder"><span class="placeholder-icon">◌</span><span>Allow camera access to begin</span></div>
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          </div>
+          <div class="camera-actions">
+            <button class="primary" id="startButton">Start camera</button>
+            <span class="hint">Works best with one hand and a clear background</span>
+          </div>
+        </div>
+
+        <aside class="result-panel">
+          <div class="panel-heading"><span>Transcript</span><span class="live-label">LIVE</span></div>
+          <div class="readout-block">
+            <span class="label">Detected sign</span>
+            <strong id="currentAlphabet">—</strong>
+          </div>
+          <div class="readout-row"><span class="label">Current word</span><span id="currentWord">—</span></div>
+          <div class="sentence-block"><span class="label">Sentence</span><p id="currentSentence">Your sentence will appear here.</p></div>
+          <div class="result-actions">
+            <button class="secondary" id="speakButton" disabled>Speak sentence</button>
+            <button class="icon-button" id="resetButton" title="Reset transcript" aria-label="Reset transcript">↺</button>
+          </div>
+          <p class="model-note"><span class="model-dot"></span>Random forest model · 38 signs</p>
+        </aside>
+      </section>
+
+      <footer><span>SPACE separates words</span><span>FULL STOP ends a sentence</span><span>Audio uses your browser</span></footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
